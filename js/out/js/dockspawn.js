@@ -2259,6 +2259,8 @@ dockspawn.PanelContainer.prototype.loadState = function(state)
     this.width = state.width;
     this.height = state.height;
     this.resize(this.width, this.height);
+
+
 };
 
 dockspawn.PanelContainer.prototype.setActiveChild = function(child)
@@ -2384,6 +2386,9 @@ dockspawn.PanelContainer.prototype.resize = function(width,  height)
     this._setPanelDimensions(width, height);
     this._cachedWidth = width;
     this._cachedHeight = height;
+
+	if(this.elementContent.onResize)
+		this.elementContent.onResize(width,height);
 };
 
 dockspawn.PanelContainer.prototype._setPanelDimensions = function(width, height)
@@ -2564,7 +2569,7 @@ dockspawn.DockGraphDeserializer = function(dockManager)
 
 dockspawn.DockGraphDeserializer.prototype.deserialize = function(json)
 {
-    var graphInfo = JSON.parse(_json);
+    var graphInfo = JSON.parse(json);
     var model = new dockspawn.DockModel();
     model.rootNode = this._buildGraph(graphInfo);
     return model;
@@ -2600,7 +2605,7 @@ dockspawn.DockGraphDeserializer.prototype._createContainer = function(nodeInfo, 
 
     var childContainers = [];
     children.forEach(function(childNode) { childContainers.push(childNode.container); });
-    childContainers = [];
+    //childContainers = [];
 
     if (containerType == "panel")
         container = new dockspawn.PanelContainer.loadFromState(containerState, this.dockManager);
@@ -2616,7 +2621,7 @@ dockspawn.DockGraphDeserializer.prototype._createContainer = function(nodeInfo, 
         // called document_manager and have to resort to this hack. use RTTI in layout engine
         var typeDocumentManager = containerState.documentManager;
         if (typeDocumentManager)
-            container = new DocumentManagerContainer(this.dockManager);
+            container = new dockspawn.DocumentManagerContainer(this.dockManager);
         else
             container = new dockspawn.FillDockContainer(this.dockManager);
     }
@@ -2648,7 +2653,7 @@ dockspawn.DockGraphSerializer.prototype._buildGraphInfo = function(node)
 
     var childrenInfo = [];
     var self = this;
-    node.childNodes.forEach(function(childNode) {
+    node.children.forEach(function(childNode) {
         childrenInfo.push(self._buildGraphInfo(childNode));
     });
 

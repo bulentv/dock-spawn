@@ -151,14 +151,16 @@
 }
 
 .splitbar-horizontal { 
-	background-color: #000000; 
+	background:url('/css/hor_line.png') repeat-x; 
+    background-color:#333;
 	width:100%; 
 	height:5px; 
 	cursor:n-resize; 
 }
 	
 .splitbar-vertical { 
-	background-color: #000000; 
+	background:url('/css/vert_line.png') repeat-y; 
+    background-color:#333;
 	width:5px; 
 	height:100%; 
 	float:left; 
@@ -180,8 +182,8 @@
 
 .tab-handle {
 	position: relative;
-	background-color: #05B; 
-	color:#ccf;
+	background-color: #7e7e7e; 
+	color:#d2d2d2;
 	height: 22px;
 	float: left;
 	overflow: hidden;
@@ -189,12 +191,12 @@
 	box-shadow: 0px 5px 20px #000;
 }
 .tab-handle:hover {
-	background-color: #F90;
+	background-color: #ffffff;
 	color:#400;
 }
 
 .tab-handle-selected {
-	background-color: #F90;
+	background-color: #dbdbdb;
 	color:#400;
 }
 
@@ -222,8 +224,8 @@
 }
 
 .tab-handle-content-seperator {
-	background-color: #F90; 
-	height: 4px;
+	background-color: #5f5f5f; 
+	height: 1px;
 }
 
 /*************************** Text Selection **************************/
@@ -254,3 +256,4 @@
 	border-top-right-radius: 10px;
 	border-top-left-radius: 10px;
 }
+
